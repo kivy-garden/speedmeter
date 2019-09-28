@@ -1,0 +1,325 @@
+#:import Factory kivy.factory.Factory
+
+<TextInput>:
+    multiline: False
+    size_hint: 1, None
+    height: sp(28)
+
+<Button>:
+    size_hint: None, None
+    height: sp(30)
+
+BoxLayout:
+    size: root.size
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.4, None
+        height: root.height
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, 0.2
+
+            Label:
+                text: 'Click on cadran to set value.\nRight-click to add color sectors.'
+
+            Button:
+                text: 'reset sectors'
+                on_release:
+                    sm.sectors = []
+                    sector_width.disabled = True            
+
+        SpeedMeter:
+            id: sm
+            start_angle: start_angle.value
+            end_angle: end_angle.value
+            subtick: subtick.value
+            value_font_size: value_font_size.value
+            display_first: display_first.active
+            display_last: display_last.active
+            label_font_size: label_font_size.value
+            label_radius_ratio: label_radius_ratio.value
+            label_angle_ratio: label_angle_ratio.value
+            label_icon_scale: label_icon_scale.value
+            sector_width: sector_width.value
+
+            on_touch_move:
+                self.value = (lambda v: self.value if v is None else v)(self.get_value(args[1].pos))
+            on_value:
+                display.text = str(self.value)
+
+        Label:
+            text: 'Value:'
+            size_hint: 1, 0.1
+
+        Label:
+            id: display
+            text: '0'
+            size_hint: 1, 0.1
+
+        Slider:
+            size_hint: 1, 0.1
+            min: sm.min
+            max: sm.max
+            value: sm.value
+            value_track: True
+            on_value: sm.value = self.value
+
+    Label:
+        size_hint: 0.1, None
+
+    GridLayout:
+        size_hint: 0.6, 1
+        cols: 3
+        spacing: 10
+        row_default_height: sp(26)
+        cols_minimum: { 0: sp(200), 1: sp(200) }
+
+        Label:
+            text: 'min (int)'
+        TextInput:
+            id: min
+            text: str(sm.min)
+            on_text_validate: sm.min = int(self.text)
+        Label:
+
+        Label:
+            text: 'max (int)'
+        TextInput:
+            id: max
+            text: str(sm.max)
+            on_text_validate: sm.max = int(self.text)
+        Label:
+
+        Label:
+            text: 'tick (int)'
+        TextInput:
+            id: max
+            text: str(sm.tick)
+            on_text_validate: sm.tick = int(self.text)
+        Label:
+
+        Label:
+            text: 'subtick (int)'
+        Slider:
+            id: subtick
+            min: 0
+            max: 20
+            step: 1
+        Label:
+            text: str(int(sm.subtick))
+
+        Label:
+            text: 'display_first'
+        CheckBox:
+            id: display_first
+            active: True
+        Label:
+
+        Label:
+            text: 'display_last'
+        CheckBox:
+            id: display_last
+            active: True
+        Label:
+
+        Label:
+            text: 'start_angle (float, -360..360)'
+        Slider:
+            id: start_angle
+            min: -360
+            max: 360
+            step: 1
+            value: -90
+        Label:
+            text: str(int(sm.start_angle))
+
+        Label:
+            text: 'end_angle (float, -360..360)'
+        Slider:
+            id: end_angle
+            min: -360
+            max: 360
+            step: 1
+            value: 135
+        Label:
+            text: str(int(sm.end_angle))
+
+        Label:
+            text: 'cadran_color (as hex)'
+        Button:
+            text: 'select color'
+            on_release:
+                dialog = Factory.ColorPickerDialog()
+                dialog._exampleCallback = app._setCadranColor
+                dialog.open()
+        Label:
+
+        Label:
+            text: 'value_font_size'
+        Slider:
+            id: value_font_size
+            min: 1
+            max: 50
+            step: 1
+            value: 15
+        Label:
+            text: '%d' % value_font_size.value
+
+        Label:
+            text: 'shadow_color (as hex)'
+        Button:
+            text: 'select color'
+            on_release:
+                dialog = Factory.ColorPickerDialog()
+                dialog._exampleCallback = app._setShadowColor
+                dialog.open()
+        Label:
+
+        Label:
+            text: 'label'
+        TextInput:
+            on_text_validate:
+                sm.label = self.text
+                app.setLabelControlState(app)
+        Label:
+
+        Label:
+            text: 'label_font_size'
+        Slider:
+            id: label_font_size
+            min: 1
+            max: 50
+            step: 1
+            value: 15
+            disabled: True
+        Label:
+            text: '%d' % label_font_size.value
+
+        Label:
+            text: 'or label_icon'
+        Button:
+            text: 'select icon'
+            on_release:
+                dialog = Factory.FileChooserDialog()
+                dialog.field2Set = 'label_icon'
+                dialog.open()
+        Label:
+
+        Label:
+            text: 'needle_image'
+        Button:
+            text: 'select icon'
+            on_release:
+                dialog = Factory.FileChooserDialog()
+                dialog.field2Set = 'needle_image'
+                dialog.open()
+        Label:
+
+        Label:
+            text: 'needle_color (as hex)'
+        Button:
+            text: 'select color'
+            on_release:
+                dialog = Factory.ColorPickerDialog()
+                dialog._exampleCallback = app._setNeedleColor
+                dialog.open()
+        Label:       
+
+        Label:
+            text: 'label_radius_ratio (float, -1..1)'
+        Slider:
+            id: label_radius_ratio
+            min: -1
+            max: 1
+            value: 0.3
+            disabled: True
+        Label:
+            text: '%.3f' % sm.label_radius_ratio
+
+        Label:
+            text: 'label_angle_ratio (float, 0..1)'
+        Slider:
+            id: label_angle_ratio
+            min: 0
+            max: 1
+            value: 0.5
+            disabled: True
+        Label:
+            text: '%.3f' % sm.label_angle_ratio
+
+        Label:
+            text: 'label_icon_scale (float, 0..2)'
+        Slider:
+            id: label_icon_scale
+            min: 0
+            max: 2
+            value: 0.5
+            disabled: True
+        Label:
+            text: '%.3f' % sm.label_icon_scale
+
+        Label:
+            text: 'sector_width (0 or int)'
+        Slider:
+            id: sector_width
+            min: 0
+            max: 30
+            value: 0
+            step: 1
+            disabled: True
+        Label:
+            text: str(int(sm.sector_width))
+
+<ColorPickerDialog@ModalView>:
+    id: colorpickerdialog
+    size_hint: 0.9, 0.9
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+
+        ColorPicker:
+            id: colorpicker
+        BoxLayout:
+            spacing: 20
+            Button:
+                text: 'done'
+                on_release:
+                    colorpickerdialog._exampleCallback(colorpicker.hex_color)
+                    colorpickerdialog.dismiss()
+            Button:
+                text: 'cancel'
+                on_release:
+                    colorpickerdialog.dismiss()
+
+<FileChooserDialog@ModalView>:
+    id: filechooserdialog
+    size_hint: 0.9, 0.9
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+
+        FileChooserIconView:
+            id: filechooser        
+            path: '.'
+            on_submit:
+                setattr(app.root.ids['sm'], root.field2Set, filechooser.selection[0])
+                app.setLabelControlState(root)
+                filechooserdialog.dismiss()
+
+        BoxLayout:
+            spacing: 20
+            Button:
+                text: 'cancel'
+                on_release:
+                    app.setLabelControlState(root)
+                    filechooserdialog.dismiss()
+            Button:
+                text: 'remove icon'
+                on_release:
+                    setattr(app.root.ids['sm'], root.field2Set, '')
+                    app.setLabelControlState(root)
+                    filechooserdialog.dismiss()

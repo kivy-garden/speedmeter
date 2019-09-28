@@ -1,0 +1,173 @@
+#:import Factory kivy.factory.Factory
+
+<BoxLayout>:
+    height: 30
+
+GridLayout:
+    rows: 4
+    spacing: 10
+
+    SpeedMeter:
+        id: speed
+        max: speed_value.max
+        tick: 20
+        start_angle: -120
+        end_angle: 120
+        subtick: 5
+        label: 'Km/h'
+        value: speed_value.value
+        cadran_color: '#0f0f0f'
+        needle_color: '#ff0000'
+        sectors: (0, '#ffffff')
+
+    SpeedMeter:
+        id: clock
+        min: 0
+        max: 12
+        tick: 1
+        display_first: False
+        start_angle: 0
+        end_angle: 0
+        subtick: 5
+        cadran_color: '#0000ff'
+        shadow_color: '#ffa500'
+        label_radius_ratio: -0.5
+        on_value: self.label = '%d s' % (self.value * 6)
+
+    NoValueSpeedMeter:
+        id: fuel
+        start_angle: 150
+        end_angle: 20
+        max: 4
+        value: 4
+        tick: 1
+        label_radius_ratio: 0.4
+        label_icon: 'fuel.png'
+        sectors: (0, '#ff0000', 1)
+        needle_color: '#ffff00'
+
+    Slider:
+        id: speed_value
+        max: 200
+        size_hint_y: None
+        height: sp(28)
+        on_value: app.set_speed()
+        on_touch_down:
+            if self.collide_point(*args[1].pos) and fuel.value <= fuel.min: Factory.fuelPopup().open()
+
+    BoxLayout:
+        size_hint_y: None
+        height: sp(28)
+
+        Button:
+            text: 'Stop'
+            size_hint_x: None
+            on_press:
+                app.clockRunning = not app.clockRunning
+                self.text = 'Stop' if app.clockRunning else 'Resume'
+        Label:
+            text: 'A simple Clock'
+
+    BoxLayout:
+        id: layout1
+        size_hint_y: None
+        height: sp(28)
+        orientation: 'vertical'
+        Button:
+            text: 'Refill !'
+            size_hint_x: None
+            pos_hint: { 'center_x': 0.5 }
+            on_release:
+                fuel.value = fuel.max
+                speed_value.disabled = False
+
+    SpeedMeter:
+        id: temperature
+        min: 35
+        max: 43
+        tick: 1
+        start_angle: 90
+        end_angle: 270
+        needle_image: 'needle3.png'
+        label_icon: 'temp.png'
+        label_icon_scale: 0.35
+        label_radius_ratio: 0.35
+        cadran_color: '#000000'
+        sectors: [35, '#0000ff', 40, '#ffff00', 42, '#ff0000', 43]
+        on_touch_move: app.set_temp(*args)
+
+    SpeedMeter:
+        id: rpm
+        max: 8
+        tick: 1
+        start_angle: -120
+        end_angle: 120
+        subtick: 4
+        label: 'rpm'
+        sectors: [0, '#000000', 6, '#ffff00', 7, '#ff0000', 8]
+        sector_width: 5
+
+    PiValueSpeedMeter:
+        id: pi
+        min: 0
+        max: 240
+        start_angle: 90
+        end_angle: -150
+        tick: 30
+        subtick: 3
+        label_icon: 'pi.png'
+        label_radius_ratio: 0
+        value_font_size: 12
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: sp(28)
+        Label:
+            text: 'Move the mouse on temp !'
+        Label:
+            id: temperature_display
+            text: '35.00'
+            size_hint_x: None
+            width: sp(10)
+
+    BoxLayout:
+        size_hint_y: None
+        height: sp(28)
+        orientation: 'vertical'
+        Label:
+            size_hint_y: None
+            height: sp(28)
+            pos_hint: { 'center_x': 0.65 }
+            text: 'Type in an angle in degree:'
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: sp(28)
+        TextInput:
+            id: pi_text
+            multiline: False
+            size_hint: None, None
+            height: sp(28)
+        Button:
+            text: 'Go!'
+            size_hint: None, None
+            height: sp(28)
+            on_release:
+                app.set_pi()
+
+<fuelPopup@Popup>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: (0.9, 0.9)
+        Label:
+            text: "You're out of gas, please refill\nthere's a refill button."
+        Button:
+            size_hint: (None, None)
+            pos_hint: { 'center_x': 0.5 }
+            text: 'close'
+            on_release:
+                app.root.ids.speed_value.value = 0
+                app.root.ids.rpm.value = 0
+                root.dismiss()
