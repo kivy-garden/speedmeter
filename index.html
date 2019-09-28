@@ -1,0 +1,133 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome to SpeedMeter’s documentation! &#8212; SpeedMeter 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Demos" href="demos.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-speedmeter-s-documentation">
+<h1>Welcome to SpeedMeter’s documentation!<a class="headerlink" href="#welcome-to-speedmeter-s-documentation" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/screenshot.png"><img alt="_images/screenshot.png" class="align-right" src="_images/screenshot.png" style="width: 50%;" /></a>
+<p>This is the documentation for the my SpeedMeter widget for the <a class="reference external" href="https://kivy.org/">Kivy</a> platform.</p>
+<p>SpeedMeter is a Kivy widget aimed at representing numerical ‘physical’
+values in a “clock-face” or dial manner. Minimum and maximum value,
+and the start and end angle, notably, are fully configurable. For the
+sake of readability, the “labels” (intermediate values represented on
+the dial) are integers, but you can override the display function to
+represent whatever string fits your needs, as illustrated with PI
+fractions in <a class="reference internal" href="demos.html#demo1"><span class="std std-ref">demo1</span></a>.</p>
+<p>SpeedMeter is clickable, so you can click on it, and the widget is
+able to compute the corresponding physical value.</p>
+<p>All default values are “reasonable”, so if you do nothing, you get a
+working widget for the range 0..100 (asymmetric, because I think it’s
+cool).</p>
+<p>For now, SpeedMeter has been tested under Linux and Android (with
+buildozer).</p>
+<p>Speedmeter functionalities were heavily inspired by Andrea Gavana’s
+SpeedMeter for wxPython.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos.html#demo1">demo1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos.html#demo2">demo2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#physical-values-and-their-representation">Physical values and their representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#indication-on-the-dial">Indication on the dial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#sectors">Sectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#other-methods">Other Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wxpython_differences.html">Notable differences with wxPython SpeedMeter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="demos.html" title="next chapter">Demos</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Ch.Tronche.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
