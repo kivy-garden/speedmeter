@@ -22,4 +22,4 @@ buildozer).
 Speedmeter functionalities were heavily inspired by Andrea Gavana’s
 SpeedMeter for wxPython.
 
-The documentation is at https://chtronche.github.io/speedmeter/
+The documentation is at https://kivy-garden.github.io/speedmeter/
