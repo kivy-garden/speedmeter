@@ -2,6 +2,7 @@
 
 from setuptools import setup, find_packages
 
+from glob import glob
 from io import open
 from os import path
 
@@ -39,8 +40,9 @@ setup(
         'dev': ['pytest>=2'],
         'travis': ['coveralls'],
     },
-    package_data={},
-    data_files=[],
+    package_data={'kivy_garden.speedmeter': [ 'images/*.png' ]},
+    data_files=[('share/kivy_garden/speedmeter',
+                 glob('demos/*.py') + glob('demos/*.kv') + glob('demos/*.png'))],
     entry_points={},
     project_urls={
         'Bug Reports': URL + '/issues',

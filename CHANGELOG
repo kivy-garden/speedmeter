@@ -1,4 +1,7 @@
-v0.1.0 Initial release
+0.1.2 2020/01/01
+================
+	* Fixed setup.py so images (necessary for demos to work) are installed
+	* fixed setup.py so demos are installed (in share/kivy_garden/speedmeter)
+
+0.1.0 Initial release
 ======================
-
-

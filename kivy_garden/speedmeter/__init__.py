@@ -20,7 +20,7 @@ from kivy.utils import get_color_from_hex
 
 __all__ = ('SpeedMeter', )
 
-__version__ = '0.1.0'
+__version__ = '0.1.2'
 
 _redraw = tuple('pos size min max'.split())
 _redraw_background = tuple('sectors sector_width shadow_color'.split())
